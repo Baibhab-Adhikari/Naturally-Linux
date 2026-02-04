@@ -1,0 +1,23 @@
+[project]
+name = "naturally-linux"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "groq>=1.0.0",
+    "pytest>=9.0.2",
+    "python-dotenv>=1.2.1",
+    "typer>=0.21.1",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["naturally_linux*"]
+
+[project.scripts]
+naturally-linux = "naturally_linux.cli:app"
