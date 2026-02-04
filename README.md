@@ -9,7 +9,16 @@ Naturally Linux is a command-line tool that turns natural-language requests into
 - Safety checks before execution
 - Confirmation before running commands
 
-## Install
+## Install (recommended)
+
+Install the UV package manager, then install the CLI system-wide:
+
+```
+curl -LsSf https://astral.sh/uv/install.sh | sh
+uv tool install naturally-linux
+```
+
+Alternative (pip):
 
 ```
 pip install naturally-linux
