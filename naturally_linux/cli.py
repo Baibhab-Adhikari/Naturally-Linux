@@ -3,7 +3,7 @@
 import typer
 
 from .executor import run_command
-from .generator import generate_command
+from .generator import explain_command, generate_command
 from .safety import is_safe_command
 
 # Create the Typer app instance.
@@ -42,8 +42,36 @@ def run(
     typer.secho("Proposed command:", fg=typer.colors.CYAN)
     typer.echo(command)
 
-    # Step 4: Stop here if the user only wants a preview.
+    # Step 4: If dry-run, explain the command and optionally execute.
     if dry_run:
+        try:
+            explanation = explain_command(command)
+            if explanation:
+                typer.secho("\nExplanation:", fg=typer.colors.GREEN)
+                typer.echo(explanation)
+        except RuntimeError as exc:
+            typer.secho(str(exc), fg=typer.colors.YELLOW)
+
+        safety_label = "SAFE" if is_safe_command(command) else "UNSAFE"
+        safety_color = typer.colors.GREEN if safety_label == "SAFE" else typer.colors.RED
+        typer.secho(f"\nSafety check: {safety_label}", fg=safety_color)
+
+        if auto_approve or typer.confirm("Run this command now?", default=False):
+            stdout, stderr, returncode = run_command(command)
+
+            if stdout:
+                typer.echo(stdout)
+
+            if stderr:
+                typer.secho(stderr, fg=typer.colors.YELLOW)
+
+            if returncode != 0:
+                raise typer.Exit(code=returncode)
+
+        typer.secho(
+            "\nDry run mode — command not executed.",
+            fg=typer.colors.YELLOW,
+        )
         return
 
     # Step 5: Ask for confirmation unless auto-approved.

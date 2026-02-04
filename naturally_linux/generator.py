@@ -15,6 +15,12 @@ SYSTEM_PROMPT = (
     "Assume a POSIX shell."
 )
 
+EXPLAIN_PROMPT = (
+    "You are a Linux command explainer. "
+    "Explain succinctly what the command does and any notable risks. "
+    "Do NOT include markdown, code fences, or extra text beyond the explanation."
+)
+
 
 def generate_command(prompt: str) -> str:
     """
@@ -43,3 +49,30 @@ def generate_command(prompt: str) -> str:
 
     # Ensure we return only a single command line.
     return content.splitlines()[0].strip()
+
+
+def explain_command(command: str) -> str:
+    """
+    Explain a shell command in plain language using Groq.
+
+    Requires the GROQ_API_KEY environment variable to be set.
+    """
+
+    api_key = os.environ.get("GROQ_API_KEY")
+    if not api_key:
+        raise RuntimeError("GROQ_API_KEY is not set")
+
+    client = Groq(api_key=api_key)
+
+    chat_completion = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[
+            {"role": "system", "content": EXPLAIN_PROMPT},
+            {"role": "user", "content": command},
+        ],
+        temperature=0.2,
+        max_tokens=200,
+    )
+
+    content = (chat_completion.choices[0].message.content or "").strip()
+    return content
