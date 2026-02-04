@@ -56,8 +56,11 @@ def run(
         safety_color = typer.colors.GREEN if safety_label == "SAFE" else typer.colors.RED
         typer.secho(f"\nSafety check: {safety_label}", fg=safety_color)
 
+        executed = False
         if auto_approve or typer.confirm("Run this command now?", default=False):
             stdout, stderr, returncode = run_command(command)
+
+            executed = True
 
             if stdout:
                 typer.echo(stdout)
@@ -67,6 +70,9 @@ def run(
 
             if returncode != 0:
                 raise typer.Exit(code=returncode)
+
+        if executed:
+            return
 
         typer.secho(
             "\nDry run mode — command not executed.",
