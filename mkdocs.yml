@@ -1,0 +1,55 @@
+site_name: Naturally Linux
+site_description: Natural-language to Linux shell command CLI with safety checks
+site_url: https://github.com/Baibhab-Adhikari/Naturally-Linux
+repo_url: https://github.com/Baibhab-Adhikari/Naturally-Linux
+repo_name: Baibhab-Adhikari/Naturally-Linux
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+  font:
+    text: Inter
+    code: JetBrains Mono
+
+nav:
+  - Overview: index.md
+  - Install: install.md
+  - Usage: usage.md
+  - Safety: safety.md
+  - Architecture: architecture.md
+  - FAQ: faq.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+
+extra_css:
+  - stylesheets/extra.css
+
+pygments_style: dracula
+pygments_style_dark: dracula
