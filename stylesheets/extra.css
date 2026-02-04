@@ -1,0 +1,124 @@
+:root {
+  --md-primary-fg-color: #3f51b5;
+  --md-accent-fg-color: #00bcd4;
+  --nl-gradient: linear-gradient(135deg, #5c6bc0 0%, #00bcd4 100%);
+  --nl-accent-red: #ef4444;
+}
+
+/* Light scheme accents */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #3949ab;
+  --md-accent-fg-color: #00bfa5;
+  --md-typeset-a-color: #2962ff;
+}
+
+/* Dark scheme accents */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #7c4dff;
+  --md-accent-fg-color: #18ffff;
+  --md-typeset-a-color: #82b1ff;
+}
+
+.md-header {
+  backdrop-filter: blur(12px);
+  background: rgba(18, 18, 24, 0.72);
+}
+
+[data-md-color-scheme="default"] .md-header {
+  background: rgba(255, 255, 255, 0.75);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Ensure header text/icons are readable in both schemes */
+.md-header,
+.md-header__inner,
+.md-header__title,
+.md-header__button {
+  color: inherit;
+}
+
+[data-md-color-scheme="default"] .md-header,
+[data-md-color-scheme="default"] .md-header__title,
+[data-md-color-scheme="default"] .md-header__button {
+  color: #111827;
+}
+
+[data-md-color-scheme="slate"] .md-header,
+[data-md-color-scheme="slate"] .md-header__title,
+[data-md-color-scheme="slate"] .md-header__button {
+  color: #f9fafb;
+}
+
+.md-header__inner {
+  max-width: 1200px;
+}
+
+.md-main__inner {
+  max-width: 1200px;
+}
+
+.md-content {
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.md-content h1,
+.md-content h2,
+.md-content h3 {
+  letter-spacing: -0.01em;
+}
+
+.md-typeset a {
+  text-decoration: none;
+}
+
+.md-typeset a:hover {
+  text-decoration: underline;
+}
+
+/* Red accent for highlights */
+.md-typeset .admonition.warning,
+.md-typeset details.warning {
+  border-left: 4px solid var(--nl-accent-red);
+}
+
+.md-typeset .admonition.warning > .admonition-title,
+.md-typeset details.warning > summary {
+  color: var(--nl-accent-red);
+}
+
+.md-typeset a[data-md-color-accent="red"],
+.md-typeset a:hover {
+  color: var(--nl-accent-red);
+}
+
+.md-typeset pre > code {
+  border-radius: 12px;
+}
+
+.md-typeset code {
+  border-radius: 6px;
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 12px;
+  border-width: 1px;
+}
+
+.md-typeset .admonition-title,
+.md-typeset summary {
+  font-weight: 600;
+}
+
+.md-sidebar {
+  font-size: 0.9rem;
+}
+
+.md-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+[data-md-color-scheme="default"] .md-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
