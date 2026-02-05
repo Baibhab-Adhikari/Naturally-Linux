@@ -37,13 +37,13 @@ export GROQ_API_KEY="your-key"
 Generate and run a command:
 
 ```
-naturally-linux run "list files larger than 10MB"
+naturally-linux  "list files larger than 10MB"
 ```
 
 Preview with explanation only:
 
 ```
-naturally-linux run "list files larger than 10MB" --dry-run
+naturally-linux "list files larger than 10MB" --dry-run
 ```
 
 ## License
