@@ -33,3 +33,19 @@ naturally-linux "list files" --yes
 ```
 
 Use this carefully. It bypasses the confirmation prompt.
+
+## Timeout
+
+Set an execution timeout in seconds:
+
+```bash
+naturally-linux "scan logs" --timeout 10
+```
+
+## API key management
+
+```bash
+naturally-linux config set-key YOUR_GROQ_API_KEY
+naturally-linux config show
+naturally-linux config delete
+```

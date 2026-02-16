@@ -26,7 +26,13 @@ pip install naturally-linux
 
 ## Setup
 
-Set your Groq API key:
+Store your Groq API key (recommended):
+
+```
+naturally-linux config set-key YOUR_GROQ_API_KEY
+```
+
+Or set it via environment variable:
 
 ```
 export GROQ_API_KEY="your-key"
@@ -37,13 +43,26 @@ export GROQ_API_KEY="your-key"
 Generate and run a command:
 
 ```
-naturally-linux  "list files larger than 10MB"
+naturally-linux "list files larger than 10MB"
 ```
 
 Preview with explanation only:
 
 ```
 naturally-linux "list files larger than 10MB" --dry-run
+```
+
+Set a timeout (seconds):
+
+```
+naturally-linux "scan logs" --timeout 10
+```
+
+Manage API key:
+
+```
+naturally-linux config show
+naturally-linux config delete
 ```
 
 ## License

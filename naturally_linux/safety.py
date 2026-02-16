@@ -1,29 +1,54 @@
 """Safety checks for generated shell commands."""
 
-from typing import Iterable
+from __future__ import annotations
+
+import re
+from typing import Iterable, List, Tuple
 
 
-def _dangerous_patterns() -> Iterable[str]:
-    """
-    Return a small blacklist of patterns that should require explicit approval.
+_DANGEROUS_RULES: List[Tuple[str, str]] = [
+    ("rm -rf", "Recursive delete detected"),
+    ("mkfs", "Filesystem format detected"),
+    ("dd if=", "Raw disk write detected"),
+    (":(){", "Fork bomb pattern detected"),
+    ("shutdown", "System shutdown detected"),
+    ("reboot", "System reboot detected"),
+]
 
-    TODO:
-    - Replace with a richer ruleset (regex, parsing, allow/deny lists).
-    - Add OS-specific checks and context-aware risk assessment.
-    """
-
-    return [
-        "rm -rf",  # recursive delete
-        "mkfs",    # format filesystem
-        "dd if=",  # raw disk writes
-        ":(){",    # fork bomb
-        "shutdown",
-        "reboot",
-    ]
+_HEURISTIC_RULES: List[Tuple[re.Pattern[str], str, str]] = [
+    (re.compile(r"\bfind\s+/\b"), "Command scans from filesystem root", "HIGH"),
+    (re.compile(r"\bdu\s+-a\s+/\b"), "Disk usage across filesystem root", "HIGH"),
+    (re.compile(r"\b(sudo)\b"), "Command requires elevated privileges", "MEDIUM"),
+    (re.compile(r"\b/\b.*-R\b"), "Recursive operation across root", "HIGH"),
+]
 
 
 def is_safe_command(command: str) -> bool:
     """Return True if the command appears safe, False otherwise."""
 
+    return not unsafe_reasons(command)
+
+
+def unsafe_reasons(command: str) -> List[str]:
     lowered = command.lower()
-    return not any(pattern in lowered for pattern in _dangerous_patterns())
+    reasons = []
+    for pattern, reason in _DANGEROUS_RULES:
+        if pattern in lowered:
+            reasons.append(reason)
+    return reasons
+
+
+def heuristic_warnings(command: str) -> List[Tuple[str, str]]:
+    warnings: List[Tuple[str, str]] = []
+    for regex, message, level in _HEURISTIC_RULES:
+        if regex.search(command):
+            warnings.append((message, level))
+    return warnings
+
+
+def heuristic_risk_level(warnings: List[Tuple[str, str]]) -> str:
+    if not warnings:
+        return "LOW"
+    if any(level == "HIGH" for _, level in warnings):
+        return "HIGH"
+    return "MEDIUM"

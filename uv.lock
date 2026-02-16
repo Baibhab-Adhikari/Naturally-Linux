@@ -384,7 +384,7 @@ wheels = [
 
 [[package]]
 name = "naturally-linux"
-version = "0.1.2"
+version = "0.1.4"
 source = { editable = "." }
 dependencies = [
     { name = "groq" },

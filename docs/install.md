@@ -22,13 +22,19 @@ pip install naturally-linux
 
 ## Set the API key
 
-Set the Groq API key as an environment variable:
+Recommended (stored locally in config):
+
+```bash
+naturally-linux config set-key YOUR_GROQ_API_KEY
+```
+
+Alternative (environment variable):
 
 ```bash
 export GROQ_API_KEY="your-key"
 ```
 
-You can add this to your shell profile (e.g., `~/.zshrc`).
+The CLI uses this priority: environment variable first, then config file.
 
 ## Verify
 

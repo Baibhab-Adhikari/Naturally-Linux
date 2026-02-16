@@ -1,9 +1,9 @@
 """Prompt → command generator (Groq LLM integration)."""
 
-import os
-
 from dotenv import load_dotenv
 from groq import Groq
+
+from .config import get_api_key
 
 load_dotenv()
 
@@ -29,9 +29,12 @@ def generate_command(prompt: str) -> str:
     Requires the GROQ_API_KEY environment variable to be set.
     """
 
-    api_key = os.environ.get("GROQ_API_KEY")
+    api_key = get_api_key()
     if not api_key:
-        raise RuntimeError("GROQ_API_KEY is not set")
+        raise RuntimeError(
+            "Missing Groq API key. Run 'naturally-linux config set-key' "
+            "or export GROQ_API_KEY."
+        )
 
     client = Groq(api_key=api_key)
 
@@ -58,9 +61,12 @@ def explain_command(command: str) -> str:
     Requires the GROQ_API_KEY environment variable to be set.
     """
 
-    api_key = os.environ.get("GROQ_API_KEY")
+    api_key = get_api_key()
     if not api_key:
-        raise RuntimeError("GROQ_API_KEY is not set")
+        raise RuntimeError(
+            "Missing Groq API key. Run 'naturally-linux config set-key' "
+            "or export GROQ_API_KEY."
+        )
 
     client = Groq(api_key=api_key)
 
