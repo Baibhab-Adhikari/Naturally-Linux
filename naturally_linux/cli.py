@@ -12,7 +12,7 @@ from typer.core import TyperGroup
 from .config import config_path, delete_api_key, get_api_key, set_api_key
 from .executor import run_command
 from .generator import explain_command, generate_command
-from .safety import heuristic_risk_level, heuristic_warnings, unsafe_reasons
+from .safety import unsafe_reasons
 
 
 class DefaultGroup(TyperGroup):
@@ -58,15 +58,6 @@ def spinner(message: str):
 
     with console.status(message):
         yield
-
-
-def _print_heuristics(command: str) -> str:
-    warnings = heuristic_warnings(command)
-    risk_level = heuristic_risk_level(warnings)
-    typer.secho(f"\nHeuristic risk: {risk_level}", fg=typer.colors.MAGENTA)
-    for message, level in warnings:
-        typer.secho(f"- {message} ({level})", fg=typer.colors.MAGENTA)
-    return risk_level
 
 
 @config_app.command("set-key")
@@ -128,17 +119,6 @@ def _handle_prompt(
         if not auto_approve and not typer.confirm("Proceed anyway?", default=False):
             raise typer.Abort()
 
-    warnings = heuristic_warnings(command)
-    if warnings:
-        typer.secho(
-            "\nThis command may scan the entire filesystem or require privileges.",
-            fg=typer.colors.MAGENTA,
-        )
-        for message, level in warnings:
-            typer.secho(f"- {message} ({level})", fg=typer.colors.MAGENTA)
-        if not typer.confirm("Proceed anyway?", default=False):
-            raise typer.Abort()
-
     if dry_run:
         try:
             with spinner("Explaining command"):
@@ -152,8 +132,6 @@ def _handle_prompt(
         safety_label = "SAFE" if not reasons else "UNSAFE"
         safety_color = typer.colors.GREEN if safety_label == "SAFE" else typer.colors.RED
         typer.secho(f"\nSafety check: {safety_label}", fg=safety_color)
-
-        _print_heuristics(command)
 
         executed = False
         returncode: Optional[int] = None

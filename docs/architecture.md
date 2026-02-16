@@ -14,7 +14,7 @@ The CLI is split into focused modules:
 
 1. User provides a prompt
 2. `generate_command()` calls Groq to produce a command
-3. `unsafe_reasons()` and heuristics evaluate risk
+3. `unsafe_reasons()` evaluates risk
 4. Command is shown to the user
 5. If confirmed, `run_command()` executes it with a timeout
 
