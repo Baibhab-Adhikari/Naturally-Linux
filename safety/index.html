@@ -414,6 +414,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#heuristic-warnings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Heuristic warnings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#limitations" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -535,6 +546,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#heuristic-warnings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Heuristic warnings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#limitations" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -587,7 +609,15 @@
 <li>Fork bombs like <code>:(){</code></li>
 <li><code>shutdown</code> or <code>reboot</code></li>
 </ul>
-<p>If a command is flagged, you will be warned and asked to confirm explicitly.</p>
+<p>If a command is flagged, you will be warned with the reason and asked to confirm explicitly.</p>
+<h2 id="heuristic-warnings">Heuristic warnings<a class="headerlink" href="#heuristic-warnings" title="Permanent link">&para;</a></h2>
+<p>The CLI also warns about potentially expensive or system-wide operations, such as:</p>
+<ul>
+<li>Root-level scans like <code>find /</code></li>
+<li>Recursive scans across <code>/</code></li>
+<li>Commands using <code>sudo</code></li>
+</ul>
+<p>When detected, the CLI will display a risk level and require explicit confirmation.</p>
 <h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
 <p>This is a simple substring-based check. It can miss risky commands or flag safe ones. Always review the proposed command.</p>
 <h2 id="planned-improvements">Planned improvements<a class="headerlink" href="#planned-improvements" title="Permanent link">&para;</a></h2>

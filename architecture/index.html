@@ -584,20 +584,21 @@
 <li><code>generator.py</code>: LLM inference and prompt handling</li>
 <li><code>safety.py</code>: safety checks for commands</li>
 <li><code>executor.py</code>: execution via <code>subprocess</code></li>
+<li><code>config.py</code>: local config storage for API key</li>
 </ul>
 <h2 id="flow">Flow<a class="headerlink" href="#flow" title="Permanent link">&para;</a></h2>
 <ol>
 <li>User provides a prompt</li>
 <li><code>generate_command()</code> calls Groq to produce a command</li>
-<li><code>is_safe_command()</code> evaluates risk</li>
+<li><code>unsafe_reasons()</code> and heuristics evaluate risk</li>
 <li>Command is shown to the user</li>
-<li>If confirmed, <code>run_command()</code> executes it</li>
+<li>If confirmed, <code>run_command()</code> executes it with a timeout</li>
 </ol>
 <h2 id="extension-points">Extension points<a class="headerlink" href="#extension-points" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Swap the LLM provider in <code>generator.py</code></li>
 <li>Add advanced safety policies in <code>safety.py</code></li>
-<li>Add timeout/sandboxing in <code>executor.py</code></li>
+<li>Add stronger sandboxing in <code>executor.py</code></li>
 </ul>
 
 

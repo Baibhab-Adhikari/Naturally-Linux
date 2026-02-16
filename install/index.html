@@ -360,10 +360,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#install-from-pypi" class="md-nav__link">
+  <a href="#install-with-uv-recommended" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Install from PyPI
+        Install with UV (recommended)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-from-pypi-pip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install from PyPI (pip)
       
     </span>
   </a>
@@ -546,10 +557,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#install-from-pypi" class="md-nav__link">
+  <a href="#install-with-uv-recommended" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Install from PyPI
+        Install with UV (recommended)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-from-pypi-pip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install from PyPI (pip)
       
     </span>
   </a>
@@ -604,16 +626,24 @@
 <li>Python 3.13+</li>
 <li>A Groq API key</li>
 </ul>
-<h2 id="install-from-pypi">Install from PyPI<a class="headerlink" href="#install-from-pypi" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>naturally-linux
+<h2 id="install-with-uv-recommended">Install with UV (recommended)<a class="headerlink" href="#install-with-uv-recommended" title="Permanent link">&para;</a></h2>
+<p>Install UV (by Astral) and then install the CLI system-wide. See the official UV docs: <a href="https://docs.astral.sh/uv/">UV by Astral</a></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>-LsSf<span class="w"> </span>https://astral.sh/uv/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>uv<span class="w"> </span>tool<span class="w"> </span>install<span class="w"> </span>naturally-linux
+</span></code></pre></div>
+<h2 id="install-from-pypi-pip">Install from PyPI (pip)<a class="headerlink" href="#install-from-pypi-pip" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>naturally-linux
 </span></code></pre></div>
 <h2 id="set-the-api-key">Set the API key<a class="headerlink" href="#set-the-api-key" title="Permanent link">&para;</a></h2>
-<p>Set the Groq API key as an environment variable:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">GROQ_API_KEY</span><span class="o">=</span><span class="s2">&quot;your-key&quot;</span>
+<p>Recommended (stored locally in config):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>naturally-linux<span class="w"> </span>config<span class="w"> </span>set-key<span class="w"> </span>YOUR_GROQ_API_KEY
 </span></code></pre></div>
-<p>You can add this to your shell profile (e.g., <code>~/.zshrc</code>).</p>
+<p>Alternative (environment variable):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">GROQ_API_KEY</span><span class="o">=</span><span class="s2">&quot;your-key&quot;</span>
+</span></code></pre></div>
+<p>The CLI uses this priority: environment variable first, then config file.</p>
 <h2 id="verify">Verify<a class="headerlink" href="#verify" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>naturally-linux<span class="w"> </span>--help
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>naturally-linux<span class="w"> </span>--help
 </span></code></pre></div>
 
 
